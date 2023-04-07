@@ -1,0 +1,49 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="login_form">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="signup_box">
+          <div class="p-3">
+            <h2 class="fs-4 fw-bold text-center">
+              Login
+            </h2>
+          </div>
+          <div class="m-2">
+            <div class="custom-form-group">
+              <label class="custom-label">Email</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <input type="text" placeholder="Enter email" matInput formControlName="email" autocomplete="off" />
+                  <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <span>Email is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="custom-form-group">
+              <label class="custom-label">Password</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <input type="password" placeholder="Enter password" matInput formControlName="password"
+                    autocomplete="off" />
+                  <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <span>Password is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="m-3 d-flex justify-content-between">
+            <button class="btn btn-md btn-success px-2" type="submit">Login</button>
+            
+          <p>Don't have an account &nbsp; <a [routerLink]="['./signup']" class="fw-bold">Click Here</a></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+

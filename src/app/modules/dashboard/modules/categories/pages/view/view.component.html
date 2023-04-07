@@ -1,0 +1,96 @@
+<!-- VIEW-PAGE -->
+<section class="sec-padding master-view-sec">
+  <!-- TOP-HEAD-TOP-BRED-CRUMB -->
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="100" fxFlexFill>
+      <div class="top-bred-crumb mb-2">
+        <ul class="breadcrumb ">
+          <li class="page-title">
+            <h4>Product category </h4>
+          </li>
+          <li class="breadcrumb-item bcrumb-1" [routerLink]="['/dashboard']">
+            <a><i class="fas fa-home"></i>Home</a>
+          </li>
+          <li class="breadcrumb-item bcrumb-2" [routerLink]="['../../list']">
+            <a>Product category </a></li>
+          <li class="breadcrumb-item active">
+            <a>View</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- MAIN-VIEW-DETAILS -->
+  <section class="main-view-box signup_box">
+    <!-- HEADER -->
+    <!-- ADD-FIELDS-HEADER -->
+    <div class="card-heading">
+      <h5>View Product categorie Details</h5>
+    </div>
+    <div *ngIf="createNewCategoryFlag && !cancelCategoryFlag">
+      <div class="view-details">
+        <app-add [categoryDetails]="categoriesDetails" (cancelCreateNewCategory)="cancelReport($event)"></app-add>
+      </div>
+    </div>
+    <!-- VIEW-DETAILS-BOX -->
+    <div *ngIf="!createNewCategoryFlag" class="view-details">
+      <!-- FORM-VIEW-DETAILS -->
+      <div class="custom-form-group">
+        <label class="custom-label" for="">Category Created At<span class="dots">:</span></label>
+        <div class="custom-form-control">
+          <p class="">
+            {{categoriesDataById?.created_at | date: 'short'}}</p>
+        </div>
+      </div>
+      <div class="custom-form-group">
+        <label class="custom-label" for="">Category Updated At<span class="dots">:</span></label>
+        <div class="custom-form-control">
+          <p class="">
+            {{categoriesDataById?.updated_at | date: 'short'}}</p>
+        </div>
+      </div>
+      <div class="custom-form-group">
+        <label class="custom-label" for="">Category ID<span class="dots">:</span></label>
+        <div class="custom-form-control">
+          <p class="">
+            {{categoriesDataById?.id}}</p>
+        </div>
+      </div>
+      <div class="custom-form-group">
+        <label class="custom-label" for="">Category Name<span class="dots">:</span></label>
+        <div class="custom-form-control">
+          <p class="">
+           {{categoriesDataById?.name}}</p>
+        </div>
+      </div>
+      <div class="custom-form-group">
+        <label class="custom-label" for="">Category Type<span class="dots">:</span></label>
+        <div class="custom-form-control">
+          <p class="">{{categoriesDataById?.type}}</p>
+        </div>
+      </div>
+      <div class="custom-form-group">
+        <label class="custom-label" for="">Category Status<span class="dots">:</span></label>
+        <div class="custom-form-control">
+          <p class="view-tag view-chip" [ngClass]="{
+            'active-chip': categoriesDataById?.status == 'ACTIVE',
+            'cancelled-chip' : categoriesDataById?.status == 'INACTIVE'
+          }">
+            {{categoriesDataById?.status | titlecase}}
+          </p>
+        </div>
+      </div>
+      <div class="custom-form-group">
+        <label class="custom-label" for="">Category Image<span class="dots">:</span></label>
+        <div class="custom-form-control">
+          <div class="view_image">
+            <img [src]="categoryImage | safe" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view_footer_btn">
+      <button class="btn btn-sm btn-primary" (click)="createNewCategory(categoryDetails)"
+        *ngIf="!createNewCategoryFlag"> Create New Category</button>
+    </div>
+  </section>
+</section>

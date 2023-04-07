@@ -1,0 +1,154 @@
+<!-- SIDE-NAV-SEC -->
+<section class="sidenav-sec">
+  <section class="master-navbar-section">
+    <!-- MAIN-TOP-NAVBAR -->
+    <div class="main-top-navbar">
+      <div fxLayout="row" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="row" fxLayout.xs="column"
+        fxLayoutAlign="center stretch" fxLayoutGap="8px">
+        <div class="top-navbar" fixedTopGap="56">
+          <div class="mx-xs-w-100" fxLayout="column" fxFlex="20" fxFlexFill fxLayoutAlign="center stretch">
+            <div>
+              <ul class="top-left-nav mobile-top-menu-hide">
+                <li class="top-nav-logo">
+                  <span class="logo-box">
+                    <img src="../../../../../assets/images/logo/logo-letter.png" alt="">
+                    <img src="../../../../../assets/images/logo/logo-light-text.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <span class="mobile-menu-toggle" (click)="mobileListNone = !mobileListNone">
+                    <button (click)="sidenav.toggle()" class="toggle-btn menu-button"
+                      [ngClass]="{'open': mobileListNone}">
+                      <div class="menu-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </button>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mx-xs-w-100" fxLayout="column" fxFlex="80" fxFlexFill>
+            <ul class="top-right-nav mobile-top-menu-hide">
+              <li class="notification-li">
+                <a>
+                  <img src="../../../../../assets/images/icons/bell.svg" alt="">
+                  <span class="notification-count">{{notificationsCount}}</span>
+                </a>
+              </li>
+              <li class="admin-profile-box">
+                <span class="admin-img-name">
+                  <img src="../../../../../../assets/images/icons/admin.jpg" alt="">
+                  <span>{{userName | titlecase}}</span>
+                </span>
+                <img (click)="logOut()" src="../../../../../assets/images/icons/logout.svg" alt="logout"
+                  class="logout-img">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- MOBILE-MENU -->
+      <div class="top-navbar mobile-top-menu-show" fxLayout="row" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="row"
+        fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="8px">
+        <div class="mobile-navbar-sec">
+          <div class="mobile-accordion">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
+                  [expandedHeight]="customExpandedHeight">
+                  <mat-panel-title>
+                    <div class="mobile-toolbar-toggler">
+                      <img src="../../../../../assets/images/icons/down-arrow.svg" alt="img">
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul class="top-right-nav">
+                  <!-- NOTIFICATION -->
+                  <li>
+                    <a>
+                      <img src="../../../../../assets/images/icons/bell.svg" alt="">
+                      <span class="notification-count">1600</span>
+                    </a>
+                  </li>
+                  <!-- PROFILE -->
+                  <li class="admin-profile" [matMenuTriggerFor]="menu">
+                    <a>
+                      <img class="admin-img" src="../../../../../assets/images/admin.jpg" loading="lazy" alt="img">
+                    </a>
+                    <span class="arrow-icon">
+                      <img src="../../../../../assets/images/icons/down-arrow.svg" loading="lazy" alt="img" alt="">
+                    </span>
+                    <ul class="dropdown-menu">
+                      <mat-menu #menu="matMenu" class="menu-dropdown profile-dropdown">
+                        <button mat-menu-item>Profile</button>
+                        <button mat-menu-item (click)="logOut()">Logout</button>
+                      </mat-menu>
+                    </ul>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+      <!-- MAIN-BODY-CONTENT -->
+      <main class="content content-wrapper">
+        <div fxLayout="row" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="row" fxLayout.xs="column"
+          fxLayoutAlign="start stretch" fxLayoutGap="8px">
+          <div fxLayout="column" fxFlex="100" fxFlexFill>
+            <!-- mat-sidenav-container -->
+            <mat-sidenav-container class="" [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
+              <!-- mat-sidenav -->
+              <mat-sidenav class="sidenav nav-sidemenu mobile-menu" #sidenav
+                [opened]="mobileQuery.matches ? 'false' : 'true'" [mode]="mobileQuery.matches ? 'over' : 'side'">
+                <perfect-scrollbar>
+                  <div class="left-side-menu">
+                    <mat-accordion>
+                      <ul class="sidebar-menus">
+                        <ng-container *ngIf="!hideExceptOrders">
+                          <!-- app-user -->
+                          <li [routerLink]="['../dashboard/tenets']" routerLinkActive="router-link-active">
+                            <span class="menu-icon">
+                              <img src="../../../../../assets/images/sidenav/6.svg" alt="">
+                            </span>
+                            <span class="menu-name">User management</span>
+                          </li>
+                          <!-- product-categorie -->
+                          <li [routerLink]="['../dashboard/categories']" routerLinkActive="router-link-active">
+                            <span class="menu-icon">
+                              <img src="../../../../../../assets/images/sidenav/3.svg" alt="">
+                            </span>
+                            <span class="menu-name">Categories</span>
+                          </li>
+                          <!-- product-sub-categorie -->
+                          <li [routerLink]="['../dashboard/sub-categories']"
+                            routerLinkActive="router-link-active">
+                            <span class="menu-icon">
+                              <img src="../../../../../../assets/images/sidenav/4.svg" alt="">
+                            </span>
+                            <span class="menu-name">Sub categories</span>
+                          </li>
+                        </ng-container>
+                      </ul>
+
+                    </mat-accordion>
+                  </div>
+                </perfect-scrollbar>
+              </mat-sidenav>
+              <!-- MAIN-CONTENT-ROUTER-OUTLET -->
+              <mat-sidenav-content class="sidenav-container master-body-wrapper">
+                <div class="master-content-view">
+                  <router-outlet></router-outlet>
+                </div>
+              </mat-sidenav-content>
+            </mat-sidenav-container>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+</section>

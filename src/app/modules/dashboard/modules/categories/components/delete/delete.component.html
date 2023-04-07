@@ -1,0 +1,19 @@
+<div class="main_dialog">
+  <h1 mat-dialog-title>
+    <h2 class="fs-5">Delete Category</h2>
+  </h1>
+  <div class="cutom_dialog_body">
+    <div mat-dialog-content>
+      <p>Do you really want to delete the Category?</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" mat-button (click)="dialogClose(data)" class="btn-primary">
+      <span>Cancel</span>
+    </button>
+    <button type="button" mat-button class="global-btn delete-btn btn-warning" (click)="deleteCategory(data)">
+      <span>Delete</span>
+    </button>
+  </div>
+
+</div>

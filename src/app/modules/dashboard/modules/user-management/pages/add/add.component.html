@@ -1,0 +1,204 @@
+<div fxLayout="row">
+  <div fxLayout="column" fxFlex="100" fxFlexFill>
+    <div class="top-bred-crumb mb-2">
+      <ul class="breadcrumb ">
+        <li class="page-title">
+          <h4>User Management </h4>
+        </li>
+        <li class="breadcrumb-item bcrumb-1" [routerLink]="['/dashboard']">
+          <a><i class="fas fa-home"></i>Home</a>
+        </li>
+        <li class="breadcrumb-item bcrumb-2" [routerLink]="['../../list']">
+          <a>User Management </a></li>
+        <li class="breadcrumb-item active">
+          <a>Add</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<form [formGroup]="addTenetForm" (ngSubmit)="onSubmitTenet($event)">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="signup_box">
+          <div class="p-3">
+            <h2 class="fs-4 fw-bold">Add Tents</h2>
+          </div>
+          <div class="m-2">
+            <!-- Full Name -->
+            <div class="custom-form-group">
+              <label class="custom-label">Full Name</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <input type="text" placeholder="Enter full Name" matInput formControlName="tenetName"
+                    autocomplete="off" />
+                  <mat-error *ngIf="tenetName.invalid && (tenetName.dirty || tenetName.touched)">
+                    <span>Full Name is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <!-- Email -->
+            <div class="custom-form-group">
+              <label class="custom-label">Email</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <input type="email" placeholder="Enter email" matInput formControlName="email" autocomplete="off" />
+                  <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <span>Email is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Password -->
+            <div class="custom-form-group">
+              <label class="custom-label">Password</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <input type="password" placeholder="Enter password" matInput formControlName="password"
+                    autocomplete="off" />
+                  <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <span>Password is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Confirm Password -->
+            <div class="custom-form-group">
+              <label class="custom-label">Confirm Password</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <input type="password" placeholder="Enter confirm password" matInput formControlName="confirmPassword"
+                    autocomplete="off" />
+                  <mat-error *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                    <span>Confirm password is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Mobile Number -->
+            <div class="custom-form-group">
+              <label class="custom-label"> Mobile Number </label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <input type="text" matInput formControlName="phone"
+                    placeholder="Enter mobile number start with +91" />
+                  <mat-error *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                    <span *ngIf="phone.hasError('required')">Mobile Number is required</span>
+                    <span *ngIf="phone.hasError('pattern')"> Enter valid mobile number start with
+                      +91</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Gender -->
+            <div class="custom-form-group">
+              <label class="custom-label">Gender</label>
+              <div class="custom-form-control">
+                <mat-radio-group formControlName="gender">
+                  <mat-radio-button value="MALE">Male</mat-radio-button> &nbsp;
+                  <mat-radio-button value="FEMALE">Female</mat-radio-button>&nbsp;
+                  <mat-radio-button value="UN_KNOWN">Others</mat-radio-button>&nbsp;
+                </mat-radio-group>
+                <mat-error *ngIf="gender.invalid && (gender.dirty || gender.touched)">
+                  <span *ngIf="gender.hasError('required')"> Gender is required </span>
+                </mat-error>
+              </div>
+            </div>
+            <!-- Profile Image -->
+            <div class="custom-form-group mt-3">
+              <label class="custom-label">Profile Image</label>
+              <div class="custom-form-control">
+                <input type="file" id="fileInput" (click)="$event.stopPropagation()" 
+                (change)="onFileSelected($event)" formControlName="tenetImage"/>
+                <span *ngIf="tenetImage.invalid && (tenetImage.dirty || tenetImage.touched)">
+                  <span>Profile Image required </span>
+                </span>
+                <span *ngIf="isImage">
+                <img [src]="imageUrl" alt="" class="uploaded_img_box" />
+              </span>
+              </div>
+            </div>
+            <!-- Status -->
+            <div class="custom-form-group mt-3">
+              <label class="custom-label">Status</label>
+              <div class="custom-form-control">
+                <mat-radio-group formControlName="status" [(ngModel)]="selectedStatus"
+                  (change)="onChangeStatus($event, selectedStatus)">
+                  <mat-radio-button value="ACTIVE">Active</mat-radio-button> &nbsp;
+                  <mat-radio-button value="INACTIVE">Inactive</mat-radio-button>&nbsp;
+                </mat-radio-group>
+                <mat-error *ngIf="status.invalid && (status.dirty || status.touched)">
+                  <span *ngIf="status.hasError('required')"> Status is required </span>
+                </mat-error>
+              </div>
+            </div>
+            <!-- Role -->
+            <div class="custom-form-group mt-3" *ngIf="rolesFlag">
+              <label class="custom-label">Role</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Select any role" formControlName="role" [(ngModel)]="selectedRole"
+                    (selectionChange)="onChangeRole($event,selectedRole)">
+                    <mat-option disabled="">Select Role</mat-option>
+                    <mat-option *ngFor="let item of rolesList" [value]="item.role_name">{{item.role_name}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="role.invalid && (role.dirty || role.touched)">
+                    <span>Roles is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Address -->
+            <div class="custom-form-group mt-3" *ngIf="addressFlag">
+              <label class="custom-label">Address</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <textarea matInput name="" id="" cols="2" rows="2" formControlName="address"></textarea>
+                  <mat-error *ngIf="address.invalid && (address.dirty || address.touched)">
+                    <span>Address is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- GST Number -->
+            <div class="custom-form-group" *ngIf="gstFlag">
+              <label class="custom-label">GST Number</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <input type="text" placeholder="Enter GST Number" matInput formControlName="gst_number"
+                    autocomplete="off" />
+                  <mat-error *ngIf="gst_number.invalid && (gst_number.dirty || gst_number.touched)">
+                    <span>GST Number is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Selling Categories -->
+            <div class="custom-form-group" *ngIf="sellingFlag">
+              <label class="custom-label">Selling Categories</label>
+              <div class="custom-form-control">
+                <mat-form-field appearance="outline">
+                  <mat-select formControlName="sell_categories">
+                    <mat-option disabled="">Select Categories</mat-option>
+                    <mat-option *ngFor="let item of sellCategories" [value]="item.name">{{item.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="sell_categories.invalid && (sell_categories.dirty || sell_categories.touched)">
+                    <span>Selling Categories is required </span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 justify-content-end d-flex">
+            <button class="btn btn-md btn-success" type="submit" [disabled]="addTenetForm.invalid">Signup</button>
+            &nbsp; &nbsp;&nbsp;
+            <button class="btn btn-md btn-warning" type="button" (click)="cancel()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

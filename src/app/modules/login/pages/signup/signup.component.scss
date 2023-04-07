@@ -1,0 +1,15 @@
+.master_signup_form {
+  .signup_box {
+    padding: 15px 0px 15px 15px;
+    .signup_body {
+      height: calc(100vh - 220px);
+      overflow: auto;
+      .custom-form-group{
+        padding-right: 25px;
+      }
+    }
+  }
+}
+a{
+    cursor: pointer;
+}
