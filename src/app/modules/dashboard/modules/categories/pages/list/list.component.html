@@ -19,7 +19,7 @@
   </div>
   <section class="p-2">
     <div class="d-flex justify-content-end">
-      <button class="btn btn-sm btn-primary" routerLink="../add"> Add New Categorie</button>
+      <button class="btn btn-sm btn-primary" (click)="addCategory()"> Add New Categorie</button>
     </div>
   </section>
   <div class="mt-3">
@@ -35,118 +35,125 @@
         </div>
       </div>
       <div class="custom-sticky-table">
-      <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sortData($event)">
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()"
-              [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-            </mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="position" sortActionDescription="Sort by number"> S No.</th>
-          <td mat-cell *matCellDef="let element; let i =index"> {{i+1}} </td>
-        </ng-container>
-         <!-- Created At Column -->
-         <ng-container matColumnDef="created_at">
-          <th mat-header-cell *matHeaderCellDef>Created At</th>
-          <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'short'}} </td>
-        </ng-container>
-        <!-- Update At Column -->
-        <ng-container matColumnDef="updated_at">
-          <th mat-header-cell *matHeaderCellDef>Updated At</th>
-          <td mat-cell *matCellDef="let element"> {{element.updated_at | date: 'short'}} </td>
-        </ng-container>
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell mat-sort-header="name" sortActionDescription="Sort by name" *matHeaderCellDef>Categorie Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-        <!-- Type Column -->
-        <ng-container matColumnDef="type">
-          <th mat-header-cell  mat-sort-header="type" sortActionDescription="Sort by type" *matHeaderCellDef>Categorie Type </th>
-          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-        </ng-container>
-        <!-- Image Column -->
-        <ng-container matColumnDef="image">
-          <th mat-header-cell *matHeaderCellDef>Categorie Image </th>
-          <td mat-cell *matCellDef="let element; let i =index">
-            <ng-container *ngIf="element.image; else emptyImage">
-              <span class="table_img">
-                <img [src]=" element.image[0].imgURL | safe" alt="">
-              </span>
-            </ng-container>
-            <ng-template #emptyImage>
-              <div class="table_img">
-                <img src="https://placehold.jp/fa0000/ffffff/30x30.png?css=%7B%22border-radius%22%3A%2215px%22%2C%22background%22%3A%22%20-webkit-gradient(linear%2C%20left%20top%2C%20left%20bottom%2C%20from(%23666666)%2C%20to(%23cccccc))%22%7D" alt="">
-              </div>
-            </ng-template>
-
-          </td>
-        </ng-container>
-        <!-- Status Column -->
-        <ng-container matColumnDef="status">
-          <th mat-header-cell mat-sort-header="status" sortActionDescription="Sort by status" *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let element">
-            <span class="table-chip view-chip" [ngClass]="{
+        <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sortData($event)">
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="position" sortActionDescription="Sort by number"> S
+              No.</th>
+            <td mat-cell *matCellDef="let element; let i =index"> {{i+1}} </td>
+          </ng-container>
+          <!-- Created At Column -->
+          <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef>Created At</th>
+            <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'short'}} </td>
+          </ng-container>
+          <!-- Update At Column -->
+          <ng-container matColumnDef="updated_at">
+            <th mat-header-cell *matHeaderCellDef>Updated At</th>
+            <td mat-cell *matCellDef="let element"> {{element.updated_at | date: 'short'}} </td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell mat-sort-header="name" sortActionDescription="Sort by name" *matHeaderCellDef>Categorie
+              Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <!-- Type Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell mat-sort-header="type" sortActionDescription="Sort by type" *matHeaderCellDef>Categorie
+              Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+          </ng-container>
+          <!-- Image Column -->
+          <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef>Categorie Image </th>
+            <td mat-cell *matCellDef="let element; let i =index">
+              <ng-container *ngIf="element.image; else emptyImage">
+                <span class="table_img">
+                  <img [src]=" element.image[0].imgURL | safe" alt="">
+                </span>
+              </ng-container>
+              <ng-template #emptyImage>
+                <div class="table_img">
+                  <img
+                    src="https://placehold.jp/fa0000/ffffff/30x30.png?css=%7B%22border-radius%22%3A%2215px%22%2C%22background%22%3A%22%20-webkit-gradient(linear%2C%20left%20top%2C%20left%20bottom%2C%20from(%23666666)%2C%20to(%23cccccc))%22%7D"
+                    alt="">
+                </div>
+              </ng-template>
+            </td>
+          </ng-container>
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell mat-sort-header="status" sortActionDescription="Sort by status" *matHeaderCellDef>
+              Status </th>
+            <td mat-cell *matCellDef="let element">
+              <span class="table-chip view-chip" [ngClass]="{
             'active-chip': element.status === 'ACTIVE',
             'cancelled-chip': element.status === 'INACTIVE'
            }">
-              {{element.status | titlecase}}
-            </span>
-          </td>
-        </ng-container>
-        <!-- Action Column -->
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
-          <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()" style="pointer-events:all;">
-            <div class="table_action_btns">
-              <button class="mat-button" type="button" class="view action_btn" title="View"
-                (click)="viewCategorie(element.id)">
-                <img src="../../../../../assets/images/icons/view.svg" alt="img">
-              </button>
-              <button class="mat-button" type="button" class="edit action_btn" title="Edit"
-                [disabled]="element.id === 'superadmin'" (click)="editCategorie(element.id)">
-                <img src="../../../../../assets/images/icons/edit.svg" alt="img">
-              </button>
-              <button class="mat-button" type="button" class="delete action_btn" title="Delete"
-                (click)="deleteCategorie(element.id)">
-                <img src="../../../../../assets/images/icons/delete.svg" alt="img">
-              </button>
-            </div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="loading">
-          <th mat-footer-cell *matFooterCellDef colspan="8">
-            <div class="custom-loader ">
-              <!-- <mat-spinner class="custom-spinner"></mat-spinner> -->
-              <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-beat" [fullScreen]="true">
-                <p style="color: white"> Loading... </p>
-              </ngx-spinner>
-            </div>
-          </th>
-        </ng-container>
-        <ng-container matColumnDef="noData">
-          <th mat-footer-cell *matFooterCellDef colspan="8" class="no-data empty-img">
-            <div class="custom-empty-img">
-              <img src='../../../../../../../assets/images/no_data_found.svg' alt="img" loading="lazy" />
-            </div>
-          </th>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        <tr mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{ hide: dataSource != null }"></tr>
-        <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{hide: !( dataSource != null && dataSource.filteredData.length == 0)
+                {{element.status | titlecase}}
+              </span>
+            </td>
+          </ng-container>
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()" style="pointer-events:all;">
+              <div class="table_action_btns">
+                <button class="mat-button" type="button" class="view action_btn" title="View"
+                  (click)="viewCategorie(element.id)">
+                  <img src="../../../../../assets/images/icons/view.svg" alt="img">
+                </button>
+                <button class="mat-button" type="button" class="edit action_btn" title="Edit"
+                  [disabled]="element.id === 'superadmin'" (click)="editCategorie(element.id)">
+                  <img src="../../../../../assets/images/icons/edit.svg" alt="img">
+                </button>
+                <button class="mat-button" type="button" class="delete action_btn" title="Delete"
+                  (click)="deleteCategorie(element.id)">
+                  <img src="../../../../../assets/images/icons/delete.svg" alt="img">
+                </button>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="loading">
+            <th mat-footer-cell *matFooterCellDef colspan="8">
+              <div class="custom-loader ">
+                <!-- <mat-spinner class="custom-spinner"></mat-spinner> -->
+                <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-beat"
+                  [fullScreen]="true">
+                  <p style="color: white"> Loading... </p>
+                </ngx-spinner>
+              </div>
+            </th>
+          </ng-container>
+          <ng-container matColumnDef="noData">
+            <th mat-footer-cell *matFooterCellDef colspan="8" class="no-data empty-img">
+              <div class="custom-empty-img">
+                <img src='../../../../../../../assets/images/no_data_found.svg' alt="img" loading="lazy" />
+              </div>
+            </th>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{ hide: dataSource != null }"></tr>
+          <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{hide: !( dataSource != null && dataSource.filteredData.length == 0)
     }"></tr>
-      </table>
-    </div>
+        </table>
+      </div>
       <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons
         aria-label="Select page of periodic elements">
       </mat-paginator>

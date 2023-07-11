@@ -1,0 +1,107 @@
+<div fxLayout="row">
+    <div fxLayout="column" fxFlex="100" fxFlexFill>
+      <div class="top-bred-crumb mb-2">
+        <ul class="breadcrumb ">
+          <li class="page-title">
+            <h4>Banner </h4>
+          </li>
+          <li class="breadcrumb-item bcrumb-1" [routerLink]="['/dashboard']">
+            <a><i class="fas fa-home"></i>Home</a>
+          </li>
+          <li class="breadcrumb-item bcrumb-2" [routerLink]="addUpdate ? ['../ list'] : ['../../list'] ">
+            <a>Banner </a></li>
+          <li class="breadcrumb-item active">
+            <a>{{addUpdate? 'Add' : 'Edit'}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="addBannerForm" (ngSubmit)="onSubmitBanner()">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="signup_box">
+            <!-- <div class="p-3">
+              <h2 class="fs-4 fw-bold"> {{addUpdate ? 'Add' : 'Edit'}} Category</h2>
+            </div> -->
+            <div class="m-2">
+              <!-- Categories Name -->
+              <div class="custom-form-group" *ngIf="!addUpdate">
+                <label class="custom-label">Category ID</label>
+                <div class="custom-form-control">
+                  <mat-form-field appearance="outline">
+                    <input type="text" placeholder="Enter Category ID" matInput formControlName="id" readonly
+                      autocomplete="off" />
+                    <!-- <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
+                      <span>Category Name is required </span>
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Categories Created At -->
+              <div class="custom-form-group" *ngIf="!addUpdate">
+                <label class="custom-label">Category Created At</label>
+                <div class="custom-form-control">
+                  <mat-form-field appearance="outline">
+                    <input type="text" placeholder="Enter Category Created At" matInput formControlName="created_at"
+                      readonly autocomplete="off" />
+                    <!-- <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
+                      <span>Category Name is required </span>
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Categories Updated At -->
+              <div class="custom-form-group" *ngIf="!addUpdate">
+                <label class="custom-label">Category Updated At</label>
+                <div class="custom-form-control">
+                  <mat-form-field appearance="outline">
+                    <input type="text" placeholder="Enter Category Updated At" matInput formControlName="updated_at"
+                      readonly autocomplete="off" />
+                    <!-- <mat-error *ngIf="updated_at.invalid && (updated_at.dirty || updated_at.touched)">
+                      <span>Category Name is required </span>
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Banner Image -->
+              <div class="custom-form-group mt-3">
+                <label class="custom-label">Category Image</label>
+                <div class="custom-form-control">
+                  <input type="file" accept="image/*" #fileInput (click)="$event.stopPropagation()"
+                    (change)="onFileChanged($event)"/>
+                  <!-- <span *ngIf="image.invalid && (image.dirty || image.touched)">
+                    <span>Profile Image required </span>
+                  </span> -->
+                  <span *ngIf="isImage">
+                    <img [src]="categoryImages" alt="" class="uploaded_img_box" />
+                  </span>
+                </div>
+              </div>
+              <!-- Status -->
+              <div class="custom-form-group mt-3">
+                <label class="custom-label">Status</label>
+                <div class="custom-form-control">
+                  <mat-radio-group formControlName="status">
+                    <mat-radio-button value="ACTIVE">Active</mat-radio-button> &nbsp;
+                    <mat-radio-button value="INACTIVE">Inactive</mat-radio-button>&nbsp;
+                  </mat-radio-group>
+                  <mat-error *ngIf="status.invalid && (status.dirty || status.touched)">
+                    <span *ngIf="status.hasError('required')"> Status is required </span>
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+            <div class="mt-5 justify-content-end d-flex">
+              <button class="btn btn-md btn-success" type="submit" [disabled]="addBannerForm.invalid">
+                {{addUpdate ? 'Add' : 'Update'}}
+                Category</button>
+              &nbsp; &nbsp;&nbsp;
+              <button class="btn btn-md btn-warning" type="button" (click)="cancel()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  

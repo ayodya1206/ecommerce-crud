@@ -61,6 +61,20 @@ export class ListComponent implements OnInit {
       /** spinner ends after 5 seconds */
       this._spinner.hide();
     }, 5000);
+    this._categoriesService.newSubscriber.subscribe(
+      {
+        next:(res:any) => {
+          debugger
+          console.log(res);
+        },
+        error:(err:any) => {
+          console.log(err)
+        },
+        complete:() => {
+          console.log(`Succesfully fetchec data from Service`);
+        }
+    }
+    )
   }
   /* ------------------------------ CUSTOM-METHODS ----------------------------- */
   // TODO GET TENTS ALL
@@ -88,15 +102,19 @@ export class ListComponent implements OnInit {
   // TODO CHANGE TENTS STATUS
   changeStatusDialog(id: any) {
   }
-  // TODO VIEW TENTS METHOD
+  // TODO ADD CATEGORY METHOD
+  addCategory(){
+    this._router.navigate(['../add'], { relativeTo: this._activatedRoute })
+  }
+  // TODO VIEW CATEGORY METHOD
   viewCategorie(id: any) {
     this._router.navigate(['../view', id], { relativeTo: this._activatedRoute })
   }
-  // TODO EDIT TENTS METHOD
+  // TODO EDIT CATEGORY METHOD
   editCategorie(id?: any): void {
     this._router.navigate(['../edit', id], { relativeTo: this._activatedRoute });
   }
-  // TODO DELETE TENTS METHOD
+  // TODO DELETE CATEGORY METHOD
   deleteCategorie(id: any) {
     // console.log(id);
     this.deleteDialog = this._dialog.open(DeleteComponent, {

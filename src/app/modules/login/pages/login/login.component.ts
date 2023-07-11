@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   currentUserRole: any;
   menuAccessRole: any;
   pushRoleAccessToArray: any[] = [];
-  loginContent:boolean = false;
+  loginContent: boolean = false;
   /* ------------------------------- CONSTRUCTOR ------------------------------ */
   constructor(
     private _router: Router,
@@ -35,9 +35,9 @@ export class LoginComponent implements OnInit {
     private _loginService: LoginService,
     private _sharedService: SharedService
   ) {
-      if(localStorage.getItem('loginDetails')){
-        this.loginContent = true;
-      }
+    if (localStorage.getItem('loginDetails')) {
+      this.loginContent = true;
+    }
   }
   /* ----------------------------- NG-LIFE-CYCLES ----------------------------- */
   ngOnInit(): void {
@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
   }
   // TODO LOGIN FUNCTIONALITY
   onSubmitLogin() {
+    debugger
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       this._toaster.warning('Please enter valid data')
@@ -70,17 +71,23 @@ export class LoginComponent implements OnInit {
             if (user) {
               console.log(user);
               this._toaster.success('LoggedIn Successfully');
-              this._router.navigate(['./home']);
               this.loginDetails = {
                 'userName': user.tenetName,
                 'userEmail': user.email,
                 'userRole': user.role,
-                'userStatus': user.status,
-              }
+                'userStatus': user.userStatus
+               }
               this.currentUserRole = user.role;
               // console.log('LoggedIn User Role');
-              // console.log(this.currentUserRole);
+              console.log(this.currentUserRole);
               localStorage.setItem('userRole', user.role);
+              localStorage.setItem('token', 'eyJhbGciOiAibm9uZSIsICJ0eXAiOiAiSldUIn0K.eyJ1c2VybmFtZSI6ImFkbWluaW5pc3RyYXRvciIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MTUxNjI0MjYyMn0')
+              debugger
+              if (this.currentUserRole == 'superadmin') {
+                this._router.navigate(['/home/dashboard']);
+              }else{
+                this._router.navigate(['./home']);
+              }
               if (!localStorage.getItem('loginDetails')) {
                 localStorage.setItem('loginDetails', JSON.stringify(this.loginDetails));
               }

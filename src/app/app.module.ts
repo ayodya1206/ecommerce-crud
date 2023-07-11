@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
@@ -16,6 +16,10 @@ import { SubCategoriesModule } from './modules/dashboard/modules/sub-categories/
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { HeaderInterceptor } from './core/interceptors/header.interceptor';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { ResponseInterceptor } from './core/interceptors/response.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,20 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     FlexLayoutModule,
     PerfectScrollbarModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi:true},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })

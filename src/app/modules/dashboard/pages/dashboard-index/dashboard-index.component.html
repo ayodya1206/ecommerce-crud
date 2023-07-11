@@ -3,10 +3,10 @@
   <section class="master-navbar-section">
     <!-- MAIN-TOP-NAVBAR -->
     <div class="main-top-navbar">
-      <div fxLayout="row" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="row" fxLayout.xs="column"
+      <!--<div fxLayout="row" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="row" fxLayout.xs="column"
         fxLayoutAlign="center stretch" fxLayoutGap="8px">
-        <div class="top-navbar" fixedTopGap="56">
-          <div class="mx-xs-w-100" fxLayout="column" fxFlex="20" fxFlexFill fxLayoutAlign="center stretch">
+           <div class="top-navbar" fixedTopGap="56">
+        <div class="mx-xs-w-100" fxLayout="column" fxFlex="20" fxFlexFill fxLayoutAlign="center stretch">
             <div>
               <ul class="top-left-nav mobile-top-menu-hide">
                 <li class="top-nav-logo">
@@ -30,7 +30,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div> 
           <div class="mx-xs-w-100" fxLayout="column" fxFlex="80" fxFlexFill>
             <ul class="top-right-nav mobile-top-menu-hide">
               <li class="notification-li">
@@ -48,11 +48,11 @@
                   class="logout-img">
               </li>
             </ul>
-          </div>
+          </div> 
         </div>
-      </div>
+      </div>-->
       <!-- MOBILE-MENU -->
-      <div class="top-navbar mobile-top-menu-show" fxLayout="row" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="row"
+      <!-- <div class="top-navbar mobile-top-menu-show" fxLayout="row" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="row"
         fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="8px">
         <div class="mobile-navbar-sec">
           <div class="mobile-accordion">
@@ -67,14 +67,14 @@
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <ul class="top-right-nav">
-                  <!-- NOTIFICATION -->
+                   NOTIFICATION 
                   <li>
                     <a>
                       <img src="../../../../../assets/images/icons/bell.svg" alt="">
                       <span class="notification-count">1600</span>
                     </a>
                   </li>
-                  <!-- PROFILE -->
+                   PROFILE
                   <li class="admin-profile" [matMenuTriggerFor]="menu">
                     <a>
                       <img class="admin-img" src="../../../../../assets/images/admin.jpg" loading="lazy" alt="img">
@@ -94,7 +94,7 @@
             </mat-accordion>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- MAIN-BODY-CONTENT -->
       <main class="content content-wrapper">
         <div fxLayout="row" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="row" fxLayout.xs="column"
@@ -116,6 +116,14 @@
                               <img src="../../../../../assets/images/sidenav/6.svg" alt="">
                             </span>
                             <span class="menu-name">User management</span>
+                          </li>
+                            <!-- Main Banner -->
+                            <li [routerLink]="['../dashboard/banner']"
+                            routerLinkActive="router-link-active">
+                            <span class="menu-icon">
+                              <img src="../../../../../../assets/images/sidenav/4.svg" alt="">
+                            </span>
+                            <span class="menu-name">Banner</span>
                           </li>
                           <!-- product-categorie -->
                           <li [routerLink]="['../dashboard/categories']" routerLinkActive="router-link-active">

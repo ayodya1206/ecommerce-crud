@@ -2,6 +2,7 @@ import { CustomGuard } from './../../core/Auth/custom.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
+import { IndexComponent } from './pages/index/index.component';
 
 const routes: Routes = [
   {
@@ -11,8 +12,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'index',
         pathMatch: 'full'
+      },
+      {
+        path: 'index',
+        component: IndexComponent
       },
       {
         path: 'dashboard',

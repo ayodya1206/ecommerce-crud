@@ -44,7 +44,7 @@ export class AddComponent implements OnInit {
   base64Code: any;
   body: any;
   images: any[] = [];
-  @Input() categoryDetails: any;
+  @Input() addCategoryDetails: any;
   // @Output() cancelCreateNewReport: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancelCreateNewCategory: EventEmitter<any> = new EventEmitter<any>();
   flag: any;

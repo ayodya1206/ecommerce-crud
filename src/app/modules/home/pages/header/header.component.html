@@ -1,0 +1,67 @@
+<section class="main_header">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="javascript:void(0)">
+            <img src="../../../../../assets/images/logo.svg" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Grocery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Mobiles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Fashions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Electronics</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Appliances</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Beauty & Toys</a>
+              </li> 
+              <form class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="Search">
+                <button class="btn btn-primary" type="button">Search</button>
+              </form>
+            </ul>
+            <div class="nav_right">
+                <ul>
+                    <li *ngIf="showCart">
+                       <img src="../../../../../assets/images/cart.svg" alt=""> Cart
+                       <span class="count">0</span>
+                    </li>
+                    <li *ngIf="!isLoggedIn">
+                        <button class="btn btn-sm btn-primary" (click)="gotoLogin()">Signup/Login</button>
+                    </li>
+                    <li class="notification-li">
+                      <a>
+                        <img src="../../../../../assets/images/icons/bell.svg" alt="">
+                        <span class="notification-count">{{notificationsCount}}</span>
+                      </a>
+                    </li>
+                    <li class="admin-profile-box" *ngIf="isLoggedIn">
+                      <span class="admin-img-name">
+                        <img src="../../../../../../assets/images/icons/admin.jpg" alt="">
+                        <span>{{userName | titlecase}}</span>
+                      </span>
+                      <img (click)="logOut()" src="../../../../../assets/images/icons/logout.svg" alt="logout"
+                        class="logout-img">
+                    </li>
+                </ul>
+                 
+            </div>
+          </div>
+        </div>
+      </nav>
+</section>

@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Tenets } from '../../models/tenets';
+import { error } from 'console';
 // import { ServerResponse } from 'http';
 
 @Component({
@@ -54,13 +56,18 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
   getAllTenets() {
     this.subscription.push(
       this._tenetService.getAllTenets().subscribe(
-        (res: any) => {
+        (res: Tenets[]) => {
           if (this.tenetsData) {
             this.tenetsData = res;
             // console.log(this.tenetsData);
             this.dataSource = new MatTableDataSource(this.tenetsData);
             this.dataSource.paginator = this.paginator;
           }
+        }, 
+        (error:any) => {
+          console.log(error)
+        }, () => {
+          console.log('Successfully fetched users');
         })
     )
   }

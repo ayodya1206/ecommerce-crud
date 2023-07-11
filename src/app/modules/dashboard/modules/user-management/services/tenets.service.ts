@@ -34,13 +34,13 @@ export class TenetsService {
     )
   }
   // TODO GET TENETS BY ID SERVICE METHOD
-  getTenetByID(id: any): Observable<any> {
-    return this._httpClient.get(constantURL.CONST_TENETS_URL + '/' + id, httpOptions).pipe(
+  getTenetByID(id: any): Observable<Tenets> {
+    return this._httpClient.get<Tenets>(constantURL.CONST_TENETS_URL + '/' + id, httpOptions).pipe(
       catchError(this.handleError)
     )
   }
   // TODO ADD TENETS SERVICE METHOD
-  addTenets(inputData: any): Observable<Tenets> {
+  addTenets(inputData: Tenets): Observable<Tenets> {
     return this._httpClient.post<Tenets>(constantURL.CONST_TENETS_URL, inputData, httpOptions).pipe(
       catchError(this.handleError)
     )

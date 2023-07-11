@@ -28,7 +28,7 @@
     </div>
     <div *ngIf="createNewCategoryFlag && !cancelCategoryFlag">
       <div class="view-details">
-        <app-add [categoryDetails]="categoriesDetails" (cancelCreateNewCategory)="cancelReport($event)"></app-add>
+        <app-add [addCategoryDetails]="categoriesResponseDetails" (cancelCreateNewCategory)="cancelReport($event)"></app-add>
       </div>
     </div>
     <!-- VIEW-DETAILS-BOX -->

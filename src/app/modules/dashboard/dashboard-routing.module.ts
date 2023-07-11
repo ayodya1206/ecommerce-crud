@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'sub-categories',
         loadChildren: () => import('src/app/modules/dashboard/modules/sub-categories/sub-categories.module').then((m) => m.SubCategoriesModule)
+      },
+      {
+        path: 'banner',
+        loadChildren: () => import('src/app/modules/dashboard/modules/banner/banner.module').then( (m) => m.BannerModule )
       }
     ]
   }

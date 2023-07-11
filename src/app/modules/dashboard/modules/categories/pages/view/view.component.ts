@@ -19,7 +19,7 @@ export class ViewComponent implements OnInit, OnDestroy {
   createNewCategoryFlag: boolean = false;
   cancelCategoryFlag: any
   sentenceCase = sentenceCase;
-  categoriesDetails: any;
+  categoriesResponseDetails: any;
   categoryDetails: any = [];
   categoryImage: any;
   /* ------------------------------- CONSTRUCTOR ------------------------------ */
@@ -50,7 +50,7 @@ export class ViewComponent implements OnInit, OnDestroy {
   createNewCategory(categoryDetails: any) {
     this.createNewCategoryFlag = true;
     this.cancelCategoryFlag = false;
-    this.categoriesDetails = categoryDetails;
+    this.categoriesResponseDetails = categoryDetails;
   }
 
   /* ------------------------------ CUSTOM-METHODS ----------------------------- */
